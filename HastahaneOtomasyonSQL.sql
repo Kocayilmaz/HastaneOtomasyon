@@ -15,10 +15,10 @@ KlinikAdi varchar(30) UNIQUE NOT NULL,
 )
 
 CREATE TABLE  Doktor(
- DoktorID int identity PRIMARY KEY NOT NULL,
- KlinikID tinyint 
- CONSTRAINT fk_KlinikID_DoktorTB
- FOREIGN KEY (KlinikID) references Klinik(KlinikID) NOT NULL,
+DoktorID int identity PRIMARY KEY NOT NULL,
+KlinikID tinyint 
+CONSTRAINT fk_KlinikID_DoktorTB
+FOREIGN KEY (KlinikID) references Klinik(KlinikID) NOT NULL,
 
 DoktorTC bigint UNIQUE NOT NULL
 CONSTRAINT ck_DoktorTC
@@ -86,16 +86,24 @@ LabID tinyint
 CONSTRAINT fk_LabID_TestTB
 FOREIGN KEY (LabID) REFERENCES Laboratuvar(LabID),
 
-TaniID int
-CONSTRAINT fk_TaniID_TestTB
-FOREIGN KEY (TaniID) REFERENCES Tani(TaniID)
+TestSonuc nvarchar(max) NULL
+)
+
+CREATE TABLE Recete(
+ReceteID int identity(1,1) PRIMARY KEY,
+
+HastaID int 
+CONSTRAINT fk_HastaID_ReceteTB
+FOREIGN KEY (HastaID) REFERENCES Hasta(HastaID),
+
+ReceteAciklama nvarchar(max)
 )
 
 CREATE TABLE Randevu(
 RandevuID int identity(1,1) PRIMARY KEY,
 
 HastaID int 
-CONSTRAINT fk_HastaID_RandevuTB
+CONSTRAINT fk_HastaID_RandevuTBS
 FOREIGN KEY (HastaID) REFERENCES Hasta(HastaID),
 
 RandevuDoktorID int 
